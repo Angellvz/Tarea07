@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Nueva Serie</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<h1>Agregar Nueva Serie</h1>
+	<form id="serie-form">
+		<label for="name">Nombre:</label>
+		<input type="text" name="name" id="name">
+		<label for="genero">Género:</label>
+		<input type="text" name="genero" id="genero">
+		<label for="puntuacion">Puntuación:</label>
+		<input type="text" name="puntuacion" id="puntuacion">
+		<button type="submit">Guardar</button>
+	</form>
+
+	<script>
+    $(document).ready(function() {
+    $('#serie-form').submit(function(event) {
+      event.preventDefault();
+  
+      var serie = {
+        name: $('#name').val(),
+        genero: $('#genero').val(),
+        puntuacion: $('#puntuacion').val(),
+      };
+  
+      $.ajax({
+        type: 'POST',
+        url: '/nuevaSerie',
+        data: serie,
+        success: function(response) {
+          console.log(response);
+        },
+        error: function(error) {
+          console.error(error);
+        }
+      });
+      console.log(serie);
+    });
+  });
+   </script>
+</body>
+</html>
